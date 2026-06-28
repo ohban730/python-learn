@@ -1,0 +1,1 @@
+# assert と raise の違い
