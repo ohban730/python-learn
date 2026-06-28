@@ -1,3 +1,6 @@
+# Based on code from LLMs-from-scratch by Sebastian Raschka (https://github.com/rasbt/LLMs-from-scratch)
+# Licensed under the Apache License, Version 2.0
+
 import re
 
 # --------------------------------------------------
