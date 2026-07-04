@@ -23,6 +23,7 @@ graph TD
 
 | 学習フェーズ | 実行コード (.py) | 解説ドキュメント (.md) | 学べる内容 |
 | :--- | :--- | :--- | :--- |
+| **PyTorchの基礎** | [pytorch_basics_demo.py](./pytorch_basics_demo.py)<br>[linear_basics_demo.py](./linear_basics_demo.py) | [llm_terminology.md](./llm_terminology.md) (7〜10章) | `nn.Module`モデルの定義、Linear層とバイアスの挙動、自作DatasetとDataLoader、訓練ループ、評価、重みの保存とロードといったPyTorch基本ワークフローの振り返り |
 | **Step 1: データの前処理** | [make-vocab.py](./make-vocab.py) | - | テキストから語彙（辞書）を作成する基本的な前処理 |
 | **Step 2: トークン化(BPE)** | [Byte-Pair_Encoding.py](./Byte-Pair_Encoding.py) | [dataset_and_dataloader.md](./dataset_and_dataloader.md) | サブワード分割（BPE）と、スライディングウィンドウ方式によるデータローダー作成（`max_length`, `stride` の役割） |
 | **Step 3: 入力埋め込み** | [make-embedding.py](./make-embedding.py) <br>[embedding_demo.py](./embedding_demo.py)<br>[arange_demo.py](./arange_demo.py) | [embedding_mechanism.md](./embedding_mechanism.md) | トークン埋め込み（`nn.Embedding`）と位置埋め込み（`torch.arange`）を足し合わせて入力テンソルを作るプロセス |
