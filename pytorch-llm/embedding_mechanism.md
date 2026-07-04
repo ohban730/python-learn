@@ -93,5 +93,5 @@ def forward(self, x):
 
 ## 4. 出典・参考情報
 
-*   **参考図書**: Sebastian Raschka 著『LLMs from Scratch』（邦題：『機械学習エンジニアのためのTransformer最速入門』）の「図2-19: 入力処理パイプライン」の概念より着想。
+*   **参考図書**: Sebastian Raschka 著『LLMs from Scratch』（邦題：『つくりながら学ぶ！LLM自作入門』）の「図2-19: 入力処理パイプライン」の概念より着想。
 *   **本ドキュメントの位置付け**: 上記書籍の概念をベースに、独自の例文（`I love learning AI.`）と独自の図式レイアウト（Mermaidフロー）を用いて理解を整理した証跡です。
