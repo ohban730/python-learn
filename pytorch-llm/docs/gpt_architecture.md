@@ -140,50 +140,49 @@ LLM（Transformerデコーダー）は、シーケンス（文）全体を一括
 
 ---
 
-## 5. トランスフォーマーブロック内部のデータフロー
+## 5. トランスフォーマーブロック内部のデータフロー (図4-13の完全再現)
 
 GPTモデルの核となる「Transformerブロック」のデータフローを示します。GPT-2では、各モジュール（AttentionやFFN）の前に層正規化（LayerNorm）を適用する **Pre-LayerNorm** 方式が採用されています。
 
-以下の図は、入力されたテンソルがブロック内でどのように処理・加算（残差接続）されるかを示しています。
+以下の図は、書籍119ページの**「図4-13：Transformerブロック」**に対応するテンソルとデータの流れを詳細に再構成したものです。
 
 ```mermaid
 graph TD
-    InputTensor["入力テンソル<br>Shape: [Batch, Seq_Len, 768]"]
+    InputTokens["■ 入力トークン埋め込み (768次元)<br>Every  ─> [0.2961, ..., 0.4604]<br>effort ─> [0.2238, ..., 0.7598]<br>moves  ─> [0.6945, ..., 0.5963]<br>you    ─> [0.0890, ..., 0.5833]<br>Shape: [Batch, 4, 768]"]
     
     subgraph Block["■ Transformer Block (1層分 / 12回繰り返す)"]
-        LN1["LayerNorm (正規化 1)"]
-        MHA["Causal Multi-Head Attention<br>(アテンション重み + マスク + ドロップアウト)"]
-        Add1["残差加算 (Shortcut 1)<br>x = x + Attention(x)"]
+        LN1["LayerNorm 1 (正規化)"]
+        MHA["Masked Multi-head Attention<br>(+ ドロップアウト)"]
+        Add1["加算 (+) ショートカット接続 1<br>x = x + Attention(x)"]
         
-        LN2["LayerNorm (正規化 2)"]
-        FFN_Lin1["FFN: 全結合層 1 (768 -> 3072)"]
-        FFN_GELU["FFN: GELU 活性化関数"]
-        FFN_Lin2["FFN: 全結合層 2 (3072 -> 768)"]
-        FFN_Drop["FFN: ドロップアウト"]
-        Add2["残差加算 (Shortcut 2)<br>x = x + FFN(x)"]
+        LN2["LayerNorm 2 (正規化)"]
+        
+        subgraph FFN["■ フィードフォワード・ブロック (右側ズーム)"]
+            Linear1["Linear層 (768 -> 3072)"]
+            GELU["GELU活性化 (ゲルー)"]
+            Linear2["Linear層 (3072 -> 768)"]
+        end
+        
+        FFN_Drop["ドロップアウト"]
+        Add2["加算 (+) ショートカット接続 2<br>x = x + FFN(x)"]
     end
+    
+    OutputTensor["■ 出力テンソル (入力と同じ次元・形状)<br>[[-0.0256, ..., 0.6890],<br> [-0.0178, ..., 0.7431],<br> [ 0.4558, ..., 0.7814],<br> [ 0.0702, ..., 0.7134]]<br>Shape: [Batch, 4, 768]"]
 
-    FinalLN["最終 LayerNorm (正規化)"]
-    LMHead["LM Head (Linear層: 768 -> 50257)"]
-    OutLogits["出力ロジット<br>Shape: [Batch, Seq_Len, 50257]"]
-
-    InputTensor --> LN1
+    InputTokens --> LN1
+    InputTokens -.-> |ショートカット接続 1| Add1
     LN1 --> MHA
     MHA --> Add1
-    InputTensor -.-> |残差接続 1| Add1
     
     Add1 --> LN2
-    LN2 --> FFN_Lin1
-    FFN_Lin1 --> FFN_GELU
-    FFN_GELU --> FFN_Lin2
-    FFN_Lin2 --> FFN_Drop
+    Add1 -.-> |ショートカット接続 2| Add2
+    LN2 --> Linear1
+    Linear1 --> GELU
+    GELU --> Linear2
+    Linear2 --> FFN_Drop
     FFN_Drop --> Add2
-    Add1 -.-> |残差接続 2| Add2
     
-    Add2 --> |次レイヤーの入力へ| Block
-    Add2 --> FinalLN
-    FinalLN --> LMHead
-    LMHead --> OutLogits
+    Add2 --> OutputTensor
 ```
 
 ### ⚙️ 内部処理のステップ解説
