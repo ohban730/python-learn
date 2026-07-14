@@ -1,8 +1,17 @@
 # 機械学習エンジニアのためのTransformers — 学習ノート
 
-書籍『機械学習エンジニアのためのTransformers』（原著: *Natural Language Processing with Transformers*）の読書ノートおよびサンプルコードの管理用フォルダです。
+本フォルダは、書籍『機械学習エンジニアのためのTransformers』（オライリー・ジャパン発行）の学習に伴う読書ノート、および検証用のサンプルコードを管理するディレクトリです。
 
-Hugging Faceのエコシステム（`transformers`, `datasets`, `tokenizers`, `accelerate` など）を活用したNLP（自然言語処理）の実践的なアプローチや、ファインチューニングなどの手法を整理します。
+## 📄 出典および権利表記 (Attribution & Rights)
+* **参考書籍**: 『機械学習エンジニアのためのTransformers』 (ISBN: 978-4-87311-995-3)
+* **著者**: Lewis Tunstall, Leandro von Werra, Thomas Wolf
+* **訳者**: 中山 光樹
+* **出版社**: 株式会社オライリー・ジャパン
+* **コードについて**: 本フォルダ内のプログラムは、同書の公式サンプルコード (GitHub: [nlp-with-transformers](https://github.com/nlp-with-transformers/notebooks)) を参考に、学習・検証目的で作成または改変したものです。著作物の引用およびサンプルコードの使用方針に準拠しています。
+
+---
+
+## 📂 学習ノート一覧
 
 | 章 | タイトル | フォルダ・ノート | 学習ステータス |
 |---|---|---|---|
