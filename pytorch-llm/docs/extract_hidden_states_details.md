@@ -71,7 +71,7 @@ emotions_encoded.set_format("torch",
 
 ## 4. 補足：`tokenizer.model_input_names` とデータ型の関係
 
-ユーザー様から「すでに Tensor 型なのでは？ `if k in tokenizer.model_input_names` はその判定用？」という疑問が生まれることがありますが、実際には以下のような違いがあります。
+「すでに Tensor 型なのでは？ `if k in tokenizer.model_input_names` はその判定用？」という疑問が生じることがありますが、実際には以下のような違いがあります。
 
 ### ① `tokenizer.model_input_names` は「名前（文字列）」のリストです
 この変数の中身は、単なる文字列のリスト（`['input_ids', 'attention_mask']`）です。
