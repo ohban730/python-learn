@@ -32,6 +32,9 @@ checkpoint-*/
 *.bin
 *.pt
 *.pth
+results/
+temp_model_dir/
 
 # 生成された画像ファイル
 *.png
+

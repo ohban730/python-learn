@@ -4,6 +4,15 @@
 
 ---
 
+## 📄 出典および権利表記 (Attribution & Rights)
+* **参考書籍**: 『つくりながら学ぶ！LLM自作入門』 (ISBN: 978-4-8399-8664-3)
+* **著者**: Sebastian Raschka (原著: Build a Large Language Model (From Scratch))
+* **訳者**: 鴨澤 眞
+* **出版社**: 株式会社マイナビ出版 / Manning Publications
+* **コードについて**: 本フォルダ内のプログラムおよび解説ノートは、同書の公式コード (GitHub: [LLMs-from-scratch](https://github.com/rasbt/LLMs-from-scratch)) を参考に、個人の学習・検証・研究目的で実装・作成したものです。著作権法（引用・学習利用）およびオープンソースライセンスに準拠しています。
+
+---
+
 ## 📁 フォルダ構成マップ (Directory Structure)
 
 GitHub上でどこに何があるかを把握するための視覚的ツリー図です。
@@ -43,7 +52,8 @@ pytorch-llm/              # 🛠️ LLMスクラッチ自作メインスペー�
 │   ├── attention_basics_demo.py    # -> [Step 4] 重みパラメータ付きアテンション
 │   └── sample.txt                  # -> トークン化テスト用の入力テキスト
 │
-└── docs/                 # 📚 ビジュアル解説ドキュメント & 用語集
+└── docs/                 # 📚 ビジュアル解説ドキュメント & 用語集 (全110件超)
+    ├── README.md                   # 🌟 docs内全ドキュメントのカテゴリ別インデックス目次
     ├── llm_development_stages.md    # -> LLMの3ステージとAttentionロードマップ
     ├── gpt_architecture.md         # -> GPTモデル全体構成とデータフロー図解
     ├── layernorm_scale_shift.md    # -> LayerNormのscaleとshiftの役割解説
